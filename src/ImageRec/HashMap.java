@@ -76,7 +76,7 @@ public class HashMap<T, K> implements Map<T,K>{
 		size++;
 		data[Hash(arg0)].add(new Data(arg0,arg1));
 		if(size >= data.length* 0.75){
-			reSize();
+			resize();
 		}
 		return arg1;
 	}
@@ -104,7 +104,7 @@ public class HashMap<T, K> implements Map<T,K>{
 	@Override
 	public int size(){return size;}
 	
-	public void reSize(){
+	public void resize(){
 		LinkedList<Data> store = new LinkedList<Data>();
 		for(LinkedList i : data){
 			for(Data m : (LinkedList<Data>)(i)){
