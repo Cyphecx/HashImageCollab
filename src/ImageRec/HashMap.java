@@ -29,7 +29,7 @@ public class HashMap<T, K> implements Map<T,K>{
 			data[i] = new LinkedList();
 		}
 	}
-	
+
 	@Override
 	public boolean containsKey(Object arg0) {
 
