@@ -22,6 +22,7 @@ public class Run {
 	}
 	
 	public static boolean compareSeeds(){
+		return false;
 		
 	}
 }
