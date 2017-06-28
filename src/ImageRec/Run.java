@@ -14,6 +14,14 @@ public class Run {
 		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marble.jpg"));
 		System.out.println(new Color(img.getRGB(0, 0)));
 		System.out.println(img.getWidth()+"x"+img.getHeight());
+		System.out.println(img.getWidth()/((double) img.getHeight()));
 	}
 
+	public static void iteratePixels(BufferedImage image){
+		
+	}
+	
+	public static boolean compareSeeds(){
+		
+	}
 }
