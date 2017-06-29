@@ -5,10 +5,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
 public class Run {
+	private static LinkedList seedList = new LinkedList();
 	public static void main(String[] args) throws IOException {
 		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marble.jpg"));
 		HashMap map = createSeeds(img);
@@ -18,6 +20,7 @@ public class Run {
 	 * and returns a HashMap containing all of the seeds in the source image
 	 */
 	public static HashMap createSeeds(BufferedImage img){
+		int counter = 0;
 		HashMap<Seed, String> seedMap = new HashMap<Seed, String>();
 		for(int i = 0; i < img.getHeight() - 5; i++){
 			for(int n = 0; n < img.getWidth() - 5; n++){
@@ -28,6 +31,11 @@ public class Run {
 					}
 				}
 				seedMap.put(seed, seed.toString());
+				counter++;
+				if(counter == 100){
+					seedList.add(seed);
+					counter = 0;
+				}
 			}
 		}
 		return seedMap;
