@@ -1,10 +1,12 @@
 package ImageRec;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -32,9 +34,28 @@ public class Run {
 		}
 		return seedMap;
 	}
-	
-	public static boolean compareSeeds(){
-		return false;
+	public static Rectangle createHitbox(LinkedList<Seed> hits){
+		int minX = 0;
+		int maxX = 0;
+		int minY = 0;
+		int maxY = 0;
 		
+		for(Seed seed : hits){
+			if(seed.getStartX() < minX){
+				minX = seed.getStartX();
+			}
+			if(seed.getEndX() > maxX){
+				maxX = seed.getEndX();
+			}
+			if(seed.getStartY() < minY){
+				minY = seed.getStartY();
+			}
+			if(seed.getEndY() > maxY){
+				maxY = seed.getEndY();
+			}
+		}
+		Rectangle output = new Rectangle();
+		output.setBounds(minX, minY, maxX-minX, maxY - minY);
+		return output;
 	}
 }
