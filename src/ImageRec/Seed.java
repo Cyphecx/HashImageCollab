@@ -18,7 +18,8 @@ public class Seed {
 		this.startY = startY;
 		this.endX = endX;
 		this.endY = endY;
-		pixels = new int[endX-startX][startY-endY];
+		pixels = new int[endX-startX][endY-startY];
+		System.out.println(pixels.length + " | " + pixels[0].length);
 	}
 
 	public int[][] getPixels() {

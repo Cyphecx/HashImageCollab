@@ -9,22 +9,28 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Run {
-	HashMap seedMap = new HashMap();
 	public static void main(String[] args) throws IOException {
 		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marble.jpg"));
-		System.out.println(new Color(img.getRGB(0, 0)));
-		System.out.println(img.getWidth()+"x"+img.getHeight());
-		System.out.println(img.getWidth()/((double) img.getHeight()));
+		HashMap map = createSeeds(img);
 	}
-
-	public HashMap createSeeds(BufferedImage img){
+	/*
+	 * createSeeds takes a buffered image as input
+	 * and returns a HashMap containing all of the seeds in the source image
+	 */
+	public static HashMap createSeeds(BufferedImage img){
+		HashMap<Seed, String> seedMap = new HashMap<Seed, String>();
 		for(int i = 0; i < img.getHeight() - 5; i++){
 			for(int n = 0; n < img.getWidth() - 5; n++){
-				Seed seed = new Seed(i, n, i+5, n+5);
+				Seed seed = new Seed(n, i, n+5, i+5);
+				for(int j = i; j < i+5; j++){
+					for(int k = n; k < n+5; k++){
+						seed.setPixelAt(j-i, k-n, new Color(img.getRGB(k,j)).getRed());
+					}
+				}
 				seedMap.put(seed, seed.toString());
 			}
 		}
-		return null;
+		return seedMap;
 	}
 	
 	public static boolean compareSeeds(){
