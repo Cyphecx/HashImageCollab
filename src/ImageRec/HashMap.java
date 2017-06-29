@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
-public class HashMap<T, K> implements Map<T,K>{
+public class HashMap<T, K>{
 	private LinkedList[] data;
 	private int size;
 	private final int defaultSize= 128;
@@ -23,7 +23,7 @@ public class HashMap<T, K> implements Map<T,K>{
 			data[i] = new LinkedList();
 		}
 	}
-	@Override
+	
 	public void clear() {
 		data = new LinkedList[defaultSize];
 		for(int i = 0; i < data.length; i++){
@@ -31,24 +31,24 @@ public class HashMap<T, K> implements Map<T,K>{
 		}
 	}
 
-	@Override
+	
 	public boolean containsKey(Object arg0) {
 
 		return false;
 	}
 
-	@Override
+	
 	public boolean containsValue(Object arg0) {
 		
 		return false;
 	}
 
-	@Override
+	
 	public Set entrySet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
+	
 	public K get(Object arg0) {
 		LinkedList<Data> working = data[hash((T)arg0)];
 		for(int i = 0; i < working.size(); i++){
@@ -60,35 +60,37 @@ public class HashMap<T, K> implements Map<T,K>{
 		
 	}
 
-	@Override
+	
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public Set keySet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public K put(T arg0, K arg1) {
+	
+	public boolean put(T arg0, K arg1) {
 		size++;
+		if(data[hash(arg0)].contains(new Data(arg0,arg1))){
+			return false;
+		}
 		data[hash(arg0)].add(new Data(arg0,arg1));
 		if(size >= data.length* 0.75){
 			reSize();
 		}
-		return arg1;
+		return true;
 	}
 
-	@Override
 	public void putAll(Map arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public K remove(Object arg0) {
 		LinkedList<Data> working = data[hash((T)arg0)];
 		for(int i = 0; i < working.size(); i++){
@@ -102,7 +104,7 @@ public class HashMap<T, K> implements Map<T,K>{
 		return null;
 	}
 
-	@Override
+	
 	public int size(){return size;}
 	
 	public void reSize(){
@@ -121,7 +123,7 @@ public class HashMap<T, K> implements Map<T,K>{
 			size--;
 		}
 	}
-	@Override
+	
 	public Collection values() {
 		return null;
 	}
