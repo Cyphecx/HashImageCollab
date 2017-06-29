@@ -20,8 +20,8 @@ public class Run {
 	public HashMap createSeeds(BufferedImage img){
 		for(int i = 0; i < img.getHeight() - 5; i++){
 			for(int n = 0; n < img.getWidth() - 5; n++){
-				//Seed seed = new Seed(i, n, i+5, n+5);
-				
+				Seed seed = new Seed(i, n, i+5, n+5);
+				seedMap.put(seed, seed.toString());
 			}
 		}
 		return null;
