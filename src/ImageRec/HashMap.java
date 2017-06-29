@@ -134,7 +134,7 @@ public class HashMap<T, K> implements Map<T,K>{
 	 */
 	public int hash(Seed s){
 		int[][] pixels = s.getPixels();
-		String bigIntInput = "";
+		String bigIntInput = "1";
 		for(int i = 0; i < pixels.length; i++){
 			for(int j = 0; j < pixels[i].length; j++){
 				bigIntInput += pixels[i][j];
