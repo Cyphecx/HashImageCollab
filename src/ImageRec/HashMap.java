@@ -1,5 +1,6 @@
 package ImageRec;
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -49,7 +50,7 @@ public class HashMap<T, K> implements Map<T,K>{
 	}
 	@Override
 	public K get(Object arg0) {
-		LinkedList<Data> working = data[Hash((T)arg0)];
+		LinkedList<Data> working = data[hash((T)arg0)];
 		for(int i = 0; i < working.size(); i++){
 			if(working.get(i).getKey().equals((T)arg0)){
 				return (K) working.get(i).getValue();
@@ -74,7 +75,7 @@ public class HashMap<T, K> implements Map<T,K>{
 	@Override
 	public K put(T arg0, K arg1) {
 		size++;
-		data[Hash(arg0)].add(new Data(arg0,arg1));
+		data[hash(arg0)].add(new Data(arg0,arg1));
 		if(size >= data.length* 0.75){
 			reSize();
 		}
@@ -89,7 +90,7 @@ public class HashMap<T, K> implements Map<T,K>{
 
 	@Override
 	public K remove(Object arg0) {
-		LinkedList<Data> working = data[Hash((T)arg0)];
+		LinkedList<Data> working = data[hash((T)arg0)];
 		for(int i = 0; i < working.size(); i++){
 			if(working.get(i).getKey().equals((T)arg0)){
 				K t = (K) working.get(i).getValue();
@@ -125,7 +126,21 @@ public class HashMap<T, K> implements Map<T,K>{
 		return null;
 	}
 	
-	public int Hash(T key){
+	public int hash(T key){
 		return (((int)(Math.pow((double)(((((key.hashCode()<<2) * 23)<<1) / 11)>>5),(double)(2) ))>>3)%data.length);
+	}
+	/*
+	 *Hash function for converting Seeds into array indexes 
+	 */
+	public int hash(Seed s){
+		int[][] pixels = s.getPixels();
+		String bigIntInput = "";
+		for(int i = 0; i < pixels.length; i++){
+			for(int j = 0; j < pixels[i].length; j++){
+				bigIntInput += pixels[i][j];
+			}
+		}
+		BigInteger hashInput = new BigInteger(bigIntInput);
+		return (((hashInput.multiply(new BigInteger("20")).pow(3))).mod(new BigInteger(data.length + "")).intValue());
 	}
 }
