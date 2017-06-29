@@ -12,18 +12,22 @@ public class HashMap<T, K> implements Map<T,K>{
 	private LinkedList[] data;
 	private int size;
 	private final int defaultSize= 128;
+	private Vector list;
 	public HashMap(){
 		data = new LinkedList[defaultSize];
 		for(int i = 0; i < data.length; i++){
 			data[i] = new LinkedList();
 		}
-		Vector list = new Vector(1024);
+		list = new Vector(1024);
 	}
 	public HashMap(int sSize){
 		data = new LinkedList[sSize];
 		for(int i = 0; i < data.length; i++){
 			data[i] = new LinkedList();
 		}
+	}
+	public Vector getList(){
+		return list;
 	}
 	@Override
 	public void clear() {
@@ -81,6 +85,7 @@ public class HashMap<T, K> implements Map<T,K>{
 		if(size >= data.length* 0.75){
 			reSize();
 		}
+		list.add(arg0);
 		return arg1;
 	}
 
