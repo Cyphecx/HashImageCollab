@@ -37,4 +37,9 @@ public class Run {
 		return false;
 		
 	}
+	public static void findSquares(BufferedImage wholeImage,BufferedImage partialImage){
+		HashMap wholeImageSeeds= createSeeds(wholeImage);
+		HashMap partialImageSeeds= createSeeds(partialImage);
+		
+	}
 }

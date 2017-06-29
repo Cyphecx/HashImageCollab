@@ -143,4 +143,8 @@ public class HashMap<T, K> implements Map<T,K>{
 		BigInteger hashInput = new BigInteger(bigIntInput);
 		return (((hashInput.multiply(new BigInteger("20")).pow(3))).mod(new BigInteger(data.length + "")).intValue());
 	}
+	public LinkedList toList(){
+		
+		return null;
+	}
 }
