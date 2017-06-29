@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 public class HashMap<T, K> implements Map<T,K>{
 	private LinkedList[] data;
@@ -16,6 +17,7 @@ public class HashMap<T, K> implements Map<T,K>{
 		for(int i = 0; i < data.length; i++){
 			data[i] = new LinkedList();
 		}
+		Vector list = new Vector(1024);
 	}
 	public HashMap(int sSize){
 		data = new LinkedList[sSize];
