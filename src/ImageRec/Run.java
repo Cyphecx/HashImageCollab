@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -14,6 +15,7 @@ public class Run {
 	private static LinkedList seedList = new LinkedList();
 	public static void main(String[] args) throws IOException {
 		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marble.jpg"));
+		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marbe1.jpg"));
 		HashMap map = createSeeds(img);
 		Rectangle hitbox = new Rectangle();
 		double percentMatch = (hitbox.getHeight()*hitbox.getWidth())/(img.getHeight()*img.getWidth());
@@ -45,7 +47,7 @@ public class Run {
 		}
 		return seedMap;
 	}
-	public static Rectangle createHitbox(LinkedList<Seed> hits){
+	public static Rectangle createHitbox(Vector<Seed> hits){
 		int minX = 0;
 		int maxX = 0;
 		int minY = 0;
