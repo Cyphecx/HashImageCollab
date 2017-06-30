@@ -15,7 +15,12 @@ public class Run {
 	private static LinkedList seedList = new LinkedList();
 	public static void main(String[] args) throws IOException {
 		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marble.jpg"));
+		BufferedImage img2 = ImageIO.read(new File("Resources/picsForHash/marlbe1.jpg"));
 		HashMap map = createSeeds(img);
+		Rectangle hitbox = new Rectangle();
+		double percentMatch = (hitbox.getHeight()*hitbox.getWidth())/(img.getHeight()*img.getWidth());
+		System.out.println("There is a "+percentMatch+"% match at ("+hitbox.getMinX()+
+				", "+hitbox.getMinY()+"), ("+hitbox.getMaxX()+", "+hitbox.getMaxY()+")");
 	}
 	/*
 	 * createSeeds takes a buffered image as input
@@ -36,12 +41,11 @@ public class Run {
 		}
 		return seedMap;
 	}
-	public static Rectangle createHitbox(LinkedList<Seed> hits){
+	public static Rectangle createHitbox(Vector<Seed> hits){
 		int minX = 0;
 		int maxX = 0;
 		int minY = 0;
 		int maxY = 0;
-
 		for(Seed seed : hits){
 			if(seed.getStartX() < minX){
 				minX = seed.getStartX();

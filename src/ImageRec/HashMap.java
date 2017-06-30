@@ -39,7 +39,9 @@ public class HashMap<T, K> implements Map<T,K>{
 
 	
 	public boolean containsKey(Object arg0) {
-		
+		if(this.get(arg0) != null){
+			return true;
+		}
 		return false;
 	}
 
