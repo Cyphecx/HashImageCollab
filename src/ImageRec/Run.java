@@ -67,12 +67,12 @@ public class Run {
 	public static Vector findHits(BufferedImage whole,BufferedImage partial){
 		HashMap wholeSeeds= createSeeds(whole);
 		HashMap partialSeeds= createSeeds(partial);
-		Vector containVector= new Vector();
+		Vector seeds= new Vector();
 		for(int x=0;x<partialSeeds.getList().size();x+=(partialSeeds.getList().size()/100)){
 			if(wholeSeeds.containsKey(partialSeeds.getList().get(x))==true){
-
+				seeds.add(partialSeeds.getList().get(x));
 			}
 		}
-		return containVector;
+		return seeds;
 	}
 }
