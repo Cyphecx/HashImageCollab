@@ -1,6 +1,7 @@
 package ImageRec;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
@@ -20,7 +21,7 @@ public class Run {
 	 * and returns a HashMap containing all of the seeds in the source image
 	 */
 	public static HashMap createSeeds(BufferedImage img){
-		//int counter = 0;
+
 		HashMap<Seed, String> seedMap = new HashMap<Seed, String>();
 		for(int i = 0; i < img.getHeight() - 5; i++){
 			for(int n = 0; n < img.getWidth() - 5; n++){
@@ -31,18 +32,37 @@ public class Run {
 					}
 				}
 				seedMap.put(seed, seed.toString());
-				/*counter++;
-				if(counter == 100){
-					seedList.add(seed);
-					counter = 0;
-				}*/
 			}
 		}
 		return seedMap;
 	}
-	
-	public static boolean compareSeeds(){
-		return false;
+	public static Rectangle createHitbox(LinkedList<Seed> hits){
+		int minX = 0;
+		int maxX = 0;
+		int minY = 0;
+		int maxY = 0;
+		
+		for(Seed seed : hits){
+			if(seed.getStartX() < minX){
+				minX = seed.getStartX();
+			}
+			if(seed.getEndX() > maxX){
+				maxX = seed.getEndX();
+			}
+			if(seed.getStartY() < minY){
+				minY = seed.getStartY();
+			}
+			if(seed.getEndY() > maxY){
+				maxY = seed.getEndY();
+			}
+		}
+		Rectangle output = new Rectangle();
+		output.setBounds(minX, minY, maxX-minX, maxY - minY);
+		return output;
+	}
+	public static void findSquares(BufferedImage wholeImage,BufferedImage partialImage){
+		HashMap wholeImageSeeds= createSeeds(wholeImage);
+		HashMap partialImageSeeds= createSeeds(partialImage);
 		
 	}
 	public static void findSquares(BufferedImage wholeImage,BufferedImage partialImage){
