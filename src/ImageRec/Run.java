@@ -15,7 +15,7 @@ public class Run {
 	private static LinkedList seedList = new LinkedList();
 	public static void main(String[] args) throws IOException {
 		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marble.jpg"));
-		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marbe1.jpg"));
+		BufferedImage img2 = ImageIO.read(new File("Resources/picsForHash/marlbe1.jpg"));
 		HashMap map = createSeeds(img);
 		Rectangle hitbox = new Rectangle();
 		double percentMatch = (hitbox.getHeight()*hitbox.getWidth())/(img.getHeight()*img.getWidth());
