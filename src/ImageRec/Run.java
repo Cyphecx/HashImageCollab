@@ -27,7 +27,7 @@ public class Run {
 	 * and returns a HashMap containing all of the seeds in the source image
 	 */
 	public static HashMap createSeeds(BufferedImage img){
-		int counter = 0;
+
 		HashMap<Seed, String> seedMap = new HashMap<Seed, String>();
 		for(int i = 0; i < img.getHeight() - 5; i++){
 			for(int n = 0; n < img.getWidth() - 5; n++){
@@ -38,11 +38,6 @@ public class Run {
 					}
 				}
 				seedMap.put(seed, seed.toString());
-				counter++;
-				if(counter == 100){
-					seedList.add(seed);
-					counter = 0;
-				}
 			}
 		}
 		return seedMap;
@@ -73,5 +68,12 @@ public class Run {
 	public static void findSquares(BufferedImage wholeImage,BufferedImage partialImage){
 		HashMap wholeImageSeeds= createSeeds(wholeImage);
 		HashMap partialImageSeeds= createSeeds(partialImage);
+	}
+	public static void findSquares(BufferedImage wholeImage,BufferedImage partialImage){
+		HashMap wholeImageSeeds= createSeeds(wholeImage);
+		HashMap partialImageSeeds= createSeeds(partialImage);
+		for(int n=0;n<wholeImageSeeds.getList().size();n+=(wholeImageSeeds.getList().size()/100))
+		partialImageSeeds.containsKey(wholeImageSeeds.getList().get(n));
+		
 	}
 }

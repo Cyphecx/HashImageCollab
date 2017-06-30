@@ -6,16 +6,19 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 public class HashMap<T, K> implements Map<T,K>{
 	private LinkedList[] data;
 	private int size;
 	private final int defaultSize= 128;
+	private Vector list;
 	public HashMap(){
 		data = new LinkedList[defaultSize];
 		for(int i = 0; i < data.length; i++){
 			data[i] = new LinkedList();
 		}
+		list = new Vector(1024);
 	}
 	public HashMap(int sSize){
 		data = new LinkedList[sSize];
@@ -23,7 +26,10 @@ public class HashMap<T, K> implements Map<T,K>{
 			data[i] = new LinkedList();
 		}
 	}
-	
+	public Vector getList(){
+		return list;
+	}
+
 	public void clear() {
 		data = new LinkedList[defaultSize];
 		for(int i = 0; i < data.length; i++){
@@ -31,7 +37,6 @@ public class HashMap<T, K> implements Map<T,K>{
 		}
 	}
 
-	
 	public boolean containsKey(Object arg0) {
 		if(this.get(arg0) != null){
 			return true;
@@ -39,13 +44,12 @@ public class HashMap<T, K> implements Map<T,K>{
 		return false;
 	}
 
-	
+	@Override
 	public boolean containsValue(Object arg0) {
 		
 		return false;
 	}
 
-	
 	public Set entrySet() {
 		// TODO Auto-generated method stub
 		return null;
@@ -68,29 +72,27 @@ public class HashMap<T, K> implements Map<T,K>{
 		return false;
 	}
 
-	
 	public Set keySet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
 	public K put(T arg0, K arg1) {
 		size++;
 		data[hash(arg0)].add(new Data(arg0,arg1));
 		if(size >= data.length* 0.75){
 			reSize();
 		}
+    
+		list.add(arg0);
 		return arg1;
 	}
 
-	
 	public void putAll(Map arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	
 	public K remove(Object arg0) {
 		LinkedList<Data> working = data[hash((T)arg0)];
 		for(int i = 0; i < working.size(); i++){
@@ -104,7 +106,6 @@ public class HashMap<T, K> implements Map<T,K>{
 		return null;
 	}
 
-	
 	public int size(){return size;}
 	
 	public void reSize(){
@@ -123,7 +124,7 @@ public class HashMap<T, K> implements Map<T,K>{
 			size--;
 		}
 	}
-	
+
 	public Collection values() {
 		return null;
 	}
