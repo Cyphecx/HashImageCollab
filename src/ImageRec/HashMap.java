@@ -6,9 +6,11 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 public class HashMap<T, K> implements Map<T,K>{
 	private LinkedList[] data;
+	private Vector list = new Vector(1024);
 	private int size;
 	private final int defaultSize= 128;
 	public HashMap(){
@@ -24,6 +26,10 @@ public class HashMap<T, K> implements Map<T,K>{
 		}
 	}
 	
+	public Vector getList(){
+		return list;
+	}
+	
 	public void clear() {
 		data = new LinkedList[defaultSize];
 		for(int i = 0; i < data.length; i++){
@@ -33,7 +39,7 @@ public class HashMap<T, K> implements Map<T,K>{
 
 	
 	public boolean containsKey(Object arg0) {
-
+		
 		return false;
 	}
 
@@ -79,6 +85,7 @@ public class HashMap<T, K> implements Map<T,K>{
 		if(size >= data.length* 0.75){
 			reSize();
 		}
+		list.add(arg0);
 		return arg1;
 	}
 

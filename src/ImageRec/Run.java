@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -21,7 +22,6 @@ public class Run {
 	 * and returns a HashMap containing all of the seeds in the source image
 	 */
 	public static HashMap createSeeds(BufferedImage img){
-		int counter = 0;
 		HashMap<Seed, String> seedMap = new HashMap<Seed, String>();
 		for(int i = 0; i < img.getHeight() - 5; i++){
 			for(int n = 0; n < img.getWidth() - 5; n++){
@@ -32,11 +32,6 @@ public class Run {
 					}
 				}
 				seedMap.put(seed, seed.toString());
-				counter++;
-				if(counter == 100){
-					seedList.add(seed);
-					counter = 0;
-				}
 			}
 		}
 		return seedMap;
@@ -46,7 +41,7 @@ public class Run {
 		int maxX = 0;
 		int minY = 0;
 		int maxY = 0;
-		
+
 		for(Seed seed : hits){
 			if(seed.getStartX() < minX){
 				minX = seed.getStartX();
@@ -65,9 +60,15 @@ public class Run {
 		output.setBounds(minX, minY, maxX-minX, maxY - minY);
 		return output;
 	}
-	public static void findSquares(BufferedImage wholeImage,BufferedImage partialImage){
-		HashMap wholeImageSeeds= createSeeds(wholeImage);
-		HashMap partialImageSeeds= createSeeds(partialImage);
-		
+	public static Vector findHits(BufferedImage whole,BufferedImage partial){
+		HashMap wholeSeeds= createSeeds(whole);
+		HashMap partialSeeds= createSeeds(partial);
+		Vector containVector= new Vector();
+		for(int x=0;x<partialSeeds.getList().size();x+=(partialSeeds.getList().size()/100)){
+			if(wholeSeeds.containsKey(partialSeeds.getList().get(x))==true){
+
+			}
+		}
+		return containVector;
 	}
 }
