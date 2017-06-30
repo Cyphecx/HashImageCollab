@@ -15,6 +15,10 @@ public class Run {
 	public static void main(String[] args) throws IOException {
 		BufferedImage img = ImageIO.read(new File("Resources/picsForHash/marble.jpg"));
 		HashMap map = createSeeds(img);
+		Rectangle hitbox = new Rectangle();
+		double percentMatch = (hitbox.getHeight()*hitbox.getWidth())/(img.getHeight()*img.getWidth());
+		System.out.println("There is a "+percentMatch+"% match at ("+hitbox.getMinX()+
+				", "+hitbox.getMinY()+"), ("+hitbox.getMaxX()+", "+hitbox.getMaxY()+")");
 	}
 	/*
 	 * createSeeds takes a buffered image as input
@@ -46,7 +50,6 @@ public class Run {
 		int maxX = 0;
 		int minY = 0;
 		int maxY = 0;
-		
 		for(Seed seed : hits){
 			if(seed.getStartX() < minX){
 				minX = seed.getStartX();
@@ -68,6 +71,5 @@ public class Run {
 	public static void findSquares(BufferedImage wholeImage,BufferedImage partialImage){
 		HashMap wholeImageSeeds= createSeeds(wholeImage);
 		HashMap partialImageSeeds= createSeeds(partialImage);
-		
 	}
 }
